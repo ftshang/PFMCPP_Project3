@@ -65,30 +65,13 @@ Part1 will be broken up into 5 separate steps
 */
 
 /*
-Thing 10)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-
-
-
-/*
 Thing 1) Indoor Gym
 5 properties:
-    1) number of treadmills
-    2) number of dumbbells
-    3) number of squat racks
-    4) number of users who have a gym membership
-    5) cost of monthly electricity bill
+    1) number of treadmills (int)
+    2) number of dumbbells (int)
+    3) number of squat racks (int)
+    4) number of users who have a gym membership (int)
+    5) cost of monthly electricity bill (double)
 3 things it can do:
     1) bill member with monthly fee
     2) turn on and off equipment (treadmills, workout machines)
@@ -98,11 +81,11 @@ Thing 1) Indoor Gym
 /*
 Thing 2) School
 5 properties:
-    1) number of teachers
-    2) name of school with mascot
-    3) number of students
-    4) number of courses available
-    5) total amount of education fund
+    1) number of teachers (int)
+    2) name of school with mascot (std::string)
+    3) number of students (int)
+    4) number of courses available (int)
+    5) total amount of education fund (double)
 3 things it can do:
     1) hire or fire teacher
     2) add student to a class
@@ -110,34 +93,46 @@ Thing 2) School
  */
 
 /*
-Thing 3) Student Directory
+Thing 3) Pizza Store
 5 properties:
-    1) names of all students
-    2) names of all teachers
-    3) names of all parents
-    4) phone number of parents
-    5) email address of teachers
+    1) number of all employees (int)
+    2) store's name (std::string)
+    3) number of total sales per month (double)
+    4) number of pizza ovens (int)
+    5) number of pizza toppings (int)
 3 things it can do:
-    1) search for student's name in directory
-    2) search for parent's phone number in directory
-    3) search for teacher's email in directory
+    1) bill customer for pizza
+    2) add toppings to pizza
+    3) hire or fire employee
  */
 
 /*
 Thing 4) Laundromat 
 5 properties:
-    1) number of washing machines
-    2) number of dryers
-    3) number of change machines (coin dispensers)
-    4) monthly profits
-    5) number of employees
+    1) number of washing machines (int)
+    2) number of dryers (int)
+    3) number of change machines / coin dispensers (int) 
+    4) monthly profits (double)
+    5) number of employees (int)
 3 things it can do:
     1) increase number of washing machines
     2) increase number of change machines
     3) increase number of employees
  */
 
-
+/*
+Thing 10) House
+5 properties:
+    1) Rooms
+    2) Plumbing
+    3) Outside Yards
+    4) AC/Heater Unit
+    5) Electricity
+3 things it can do:
+    1) Heat and cool rooms
+    2) Move furniture in room
+    3) Set amount of time for water sprinklers
+ */
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
