@@ -36,51 +36,51 @@ Sub Object 1: Steering Wheel
     Name 4 things you'll find on the:    Steering Wheel
         1) paddle shifters
         2) 'cruise control' controls
-        3) 
-        4) 
+        3) car's horn
+        4) the car make (logo)
     Name 2 things you can do with the:   Steering Wheel
         1) adjust cruise control settings.
-        2)
+        2) honk the horn
         
 Sub Object 2: Instrument Cluster
     Name 4 things you'll find on the:   Instrument Cluster
-        1)
-        2)
-        3)
-        4)
+        1) speedometer
+        2) gas tank display
+        3) odometer
+        4) oil pressure gauge
     Name 3 things you can do with the:   Instrument Cluster
-        1)
-        2)
-        3)
+        1) check speed of car
+        2) check total mileage
+        3) check fuel levels
     
 Sub Object 3: Environment Controls
     Name 3 things you'll find on the:    Environment Controls
-        1)
-        2)
-        3)
+        1) temperature display
+        2) air conditioner
+        3) defrosters
     Name 3 things you can do with the:   Environment Controls
-        1)
-        2)
-        3)
+        1) increase / decrease temperature
+        2) turn on / turn off air conditioner
+        3) turn on / turn off defroster
 
 Sub Object 4: Infotainment System
     Name 3 things you'll find on the:    Infotainment System
-        1)
-        2)
-        3)
+        1) display screen
+        2) navigation (GPS) selector
+        3) radio / media selector
     Name 3 things you can do with the:   Infotainment System
-        1)
-        2)
-        3)
+        1) play / pause current song
+        2) select radio type (AM/FM)
+        3) turn on GPS navigation
 
 Sub Object 5: Seat 
     Name 3 things you'll find on the:    Seat
-        1)
-        2)
-        3)
+        1) seat cushions
+        2) seat belt
+        3) head rest
     Name 2 things you can do with the:   Seat
-        1)
-        2)
+        1) move seat forward / backwards
+        2) change the incline of the seat
 */
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
