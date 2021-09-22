@@ -81,79 +81,6 @@ Part1 will be broken up into 5 separate steps
 */
 
 /*
-Thing 5)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 6)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 7)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 8)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-/*
-Thing 9)
-5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
-3 things it can do:
-    1)
-    2)
-    3)
- */
-
-
-
-
-/*
 Thing 1) Indoor Gym
 5 properties:
     1) number of treadmills (int)
@@ -210,17 +137,88 @@ Thing 4) Laundromat
  */
 
 /*
-Thing 10) House
+Thing 5) Display
 5 properties:
-    1) Rooms
-    2) Plumbing
-    3) Outside Yards
-    4) AC/Heater Unit
-    5) Electricity
+    1) color calibration setting (std::string)
+    2) total number of pixels (int)
+    3) brand (std::string)
+    4) year of make (int)
+    5) model type (std::string)
 3 things it can do:
-    1) Heat and cool rooms
-    2) Move furniture in room
-    3) Set amount of time for water sprinklers
+    1) change pixel resolution
+    2) display brand, year of make, and model type
+    3) set color calibration setting
+ */
+
+/*
+Thing 6) Memory
+5 properties:
+    1) brand (std::string)
+    2) RAM consumption (double)
+    3) memory capacity (int)
+    4) memory speed (std::string)
+    5) memory type (std::string)
+3 things it can do:
+    1) run programs simultaneously 
+    2) limit amount of RAM consumption
+    3) overclock RAM
+ */
+
+/*
+Thing 7) CPU
+5 properties:
+    1) brand (name)
+    2) number of cores (int)
+    3) core clock speed (float)
+    4) integrated graphics (std::string)
+    5) amount of power consumption / TDP (double)
+3 things it can do:
+    1) increase number of cores being used
+    2) overclock CPU
+    3) launch and application
+ */
+
+/*
+Thing 8) Programs
+5 properties:
+    1) name of software (std::string)
+    2) current installed version (float)
+    3) new update availability (bool)
+    4) name of software company (std::string)
+    5) operating system (std::string)
+3 things it can do:
+    1) check for any updates
+    2) install updates
+    3) display installed version and operating system details 
+ */
+
+/*
+Thing 9) Storage
+5 properties:
+    1) capactiy (int)
+    2) storage type (std::string)
+    3) dimension size (double)
+    4) brand (std::string)
+    5) type of storage interface (std::string)
+3 things it can do:
+    1) change boot drive
+    2) partition drives
+    3) store data to drive
+ */
+
+/*
+Thing 10) Computer
+5 properties:
+    1) Display
+    2) Memory
+    3) CPU
+    4) Programs
+    5) Storage 
+
+3 things it can do:
+    1) install program
+    2) increase brightness for screen
+    3) increase number of core processing for CPU
  */
 
 /*
