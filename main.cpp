@@ -57,59 +57,59 @@ Thing: Car Wash
  */
 
 /*
-Thing 1)
+Thing 1) Indoor Gym
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of treadmills
+    2) number of dumbbells
+    3) number of squat racks
+    4) number of users who have a gym membership
+    5) cost of monthly electricity bill
 3 things it can do:
-    1)
-    2)
-    3)
+    1) bill member with monthly fee
+    2) turn on and off equipment (treadmills, workout machines)
+    3) turn on and off electricity
  */
 
 /*
-Thing 2)
+Thing 2) School
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of teachers
+    2) name of school with mascot
+    3) number of students
+    4) number of courses available
+    5) total amount of education fund
 3 things it can do:
-    1)
-    2)
-    3)
+    1) hire or fire teacher
+    2) add student to a class
+    3) add course to full course catalog
  */
 
 /*
-Thing 3)
+Thing 3) Student Directory
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) names of all students
+    2) names of all teachers
+    3) names of all parents
+    4) phone number of parents
+    5) email address of teachers
 3 things it can do:
-    1)
-    2)
-    3)
+    1) search for student's name in directory
+    2) search for parent's phone number in directory
+    3) search for teacher's email in directory
  */
 
 /*
-Thing 4)
+Thing 4) Laundromat 
 5 properties:
-    1)
-    2)
-    3)
-    4)
-    5)
+    1) number of washing machines
+    2) number of dryers
+    3) number of change machines (coin dispensers)
+    4) monthly profits
+    5) number of employees
 3 things it can do:
-    1)
-    2)
-    3)
+    1) increase number of washing machines
+    2) increase number of change machines
+    3) increase number of employees
  */
 
 
