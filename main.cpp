@@ -108,9 +108,57 @@ struct CarWash
     You'll need to insert the Person struct from the video in the space below.
  */
 
+struct Limb
+{
+    int startingPoint = 0;
+    int footSize = 10;
+    int speed = 1;
 
+    void stepForward();
+    int stepSize();
+};
 
+void Limb::stepForward()
+{
+    startingPoint += footSize;
+}
 
+int Limb::stepSize()
+{
+    footSize += speed;
+    return footSize;
+}
+
+struct Person
+{
+    Limb leftFoot;
+    Limb rightFoot;
+    int age;
+    int height;
+    float hairLength;
+    float GPA;
+    unsigned int SATScore;
+    int distanceTraveled;
+
+    void run(int howFast, bool startWithLeftFoot);
+};
+
+void Person::run(int howFast, bool startWithLeftFoot)
+{
+    if (startWithLeftFoot == true)
+    {
+        leftFoot.stepForward();
+        rightFoot.stepForward();
+
+    }
+    else
+    {
+        rightFoot.stepForward();
+        leftFoot.stepForward();
+    }
+    distanceTraveled += leftFoot.stepSize() + rightFoot.stepSize();
+    howFast = leftFoot.footSize + rightFoot.footSize;
+}
 
  /*
  2) provide implementations for the member functions you declared in your 10 user-defined types from the previous video outside of your UDT definitions.
@@ -123,21 +171,6 @@ struct CarWash
  
  4) After you finish defining each type/function, click the [run] button.  Clear up any errors or warnings as best you can.
  if your code produces a -Wpadded warning, add '-Wno-padded' to the .replit file with the other compiler flags (-Weverything -Wno-missing-prototypes etc etc)
- */
-
-
-/*
-Thing 1) Indoor Gym
-5 properties:
-    1) number of treadmills (int)
-    2) number of dumbbells (int)
-    3) number of squat racks (int)
-    4) number of users who have a gym membership (int)
-    5) cost of monthly electricity bill (double)
-3 things it can do:
-    1) bill member with monthly fee
-    2) turn on and off equipment (treadmills, workout machines)
-    3) turn on and off electricity
  */
 
 struct Gym
@@ -176,19 +209,55 @@ struct Gym
     Member gymMember;
 };
 
-/*
-Thing 2) School
-5 properties:
-    1) number of teachers (int)
-    2) name of school with mascot (std::string)
-    3) number of students (int)
-    4) number of courses available (int)
-    5) total amount of education fund (double)
-3 things it can do:
-    1) hire or fire teacher
-    2) add student to a class
-    3) add course to full course catalog
- */
+double Gym::Member::getMemberAccountBalance(int accountNumber)
+{
+    if (accountNumber < 0)
+        accountBalance = 0;
+    return accountBalance;
+}
+
+double Gym::Member::weighCurrentSelf(double startingWeight, bool finishedWorkout)
+{
+    if (finishedWorkout == true)
+        startingWeight -= 1.5;
+    else
+        startingWeight += .5;
+    return startingWeight;
+}
+
+void Gym::Member::exercise(std::string machineType, int minutes)
+{
+    if (minutes == 60 && machineType == "Treadmill")
+        weight -= 5.5;
+    else if (minutes == 30 && machineType == "Dumbbells")
+        weight += 2.5;
+    else
+        weight += .5;
+}
+
+double Gym::billMonthlyFee(Member member, float discount)
+{
+    member.accountBalance -= static_cast<double>(discount * 35.5f);
+    return member.accountBalance;
+}
+
+bool Gym::turnOnEquipment(std::string employeeName, bool equipmentState)
+{
+    if (equipmentState == false && employeeName != "None")
+        equipmentState = true;
+    else
+        equipmentState = false;
+    return equipmentState;
+}
+
+bool turnOffElectricity(bool switchSetting)
+{
+    if (switchSetting == true)
+        switchSetting = false;
+    else
+        switchSetting = true;
+    return switchSetting;
+}
 
 struct School
 {
@@ -226,19 +295,53 @@ struct School
     Teacher mathTeacher; 
 };
 
-/*
-Thing 3) Pizza Store
-5 properties:
-    1) number of all employees (int)
-    2) store's name (std::string)
-    3) number of total sales per month (double)
-    4) number of pizza ovens (int)
-    5) number of pizza toppings (int)
-3 things it can do:
-    1) bill customer for pizza
-    2) add toppings to pizza
-    3) hire or fire employee
- */
+void School::Teacher::teachClass(std::string day, int classDuration)
+{
+    while (classDuration > 0 && day != "Weekend")
+        classDuration -= 1;
+}
+
+bool School::Teacher::askForPromotion(double payIncrease)
+{
+    bool getPromotion;
+    if (payIncrease < 15000)
+        getPromotion = true;
+    else
+        getPromotion = false;
+    return getPromotion;
+}
+
+void School::Teacher::dismissClass(int minRemaining, bool finishedLecture)
+{
+    if (finishedLecture == true && minRemaining == 0)
+        numWorkingYears += 1;
+}
+
+bool School::hireOrFireTeacher(Teacher teacher)
+{
+    bool hire;
+    if (teacher.deparment == "Mathematics")
+        hire = false;
+    else
+        hire = true;
+    return hire;
+}
+
+void School::addStudentToClass(Teacher teacher, std::string studentName)
+{
+    if (teacher.numWorkingYears > 10 && studentName != "None")
+        numStudents += 1;
+    else
+        numStudents -= 1;
+}
+
+void School::addCourse(std::string courseName, int gradeLevel)
+{
+    if (gradeLevel >= 9 && courseName != "None")
+        numCourses += 1;
+    else
+        numCourses -= 1;
+}
 
 struct PizzaStore
 {
@@ -254,26 +357,44 @@ struct PizzaStore
     int numToppings = 14;
 
     // bill customer for pizza
-    double billCustomer(std::string pizzaType, int numToppings, float discountSale = .10f);
+    double billCustomer(std::string pizzaType, int toppings, float discountSale = .10f);
     // add toppings to pizza
     int addToppings(std::string toppingName, bool maxedOutToppings = false);
     // hire or fire employee
     bool hireOrFireEmployee(std::string employeeName, int totalStaffMembers);
 };
 
-/*
-Thing 4) Laundromat 
-5 properties:
-    1) number of washing machines (int)
-    2) number of dryers (int)
-    3) number of change machines / coin dispensers (int) 
-    4) monthly profits (double)
-    5) number of employees (int)
-3 things it can do:
-    1) increase number of washing machines
-    2) increase number of change machines
-    3) increase number of employees
- */
+double PizzaStore::billCustomer(std::string pizzaType, int toppings, float discountSale)
+{
+    double bill;
+    if (pizzaType == "regular")
+        discountSale = .20f;
+    bill = (20 + (.5 * toppings)) * static_cast<double>(discountSale); 
+    return bill;
+}
+
+int PizzaStore::addToppings(std::string toppingName, bool maxedOutToppings)
+{
+    if (maxedOutToppings == false && toppingName != "Pineapple")
+        numToppings += 1;
+    return numToppings;
+}
+
+bool PizzaStore::hireOrFireEmployee(std::string employeeName, int totalStaffMembers)
+{
+    bool hire;
+    if (employeeName != "None" || totalStaffMembers < 25)
+    {
+        numEmployees += 1;
+        hire = true;
+    }
+    else
+    {
+        numEmployees -= 1;
+        hire = false;
+    }
+    return hire;
+}
 
 struct Laundromat
 {
@@ -296,19 +417,28 @@ struct Laundromat
     int hireEmployee(int staffTotal, std::string employeeName, bool nowHiring = true);
 };
 
-/*
-Thing 5) Display
-5 properties:
-    1) color calibration setting (std::string)
-    2) total number of pixels (int)
-    3) brand (std::string)
-    4) year of make (int)
-    5) model type (std::string)
-3 things it can do:
-    1) change pixel resolution
-    2) display brand, year of make, and model type
-    3) set color calibration setting
- */
+int Laundromat::addWashingMachine(int numberOfMachines, std::string brandName)
+{
+    if (numberOfMachines > 0 && brandName == "LG")
+        numWashingMachines += numberOfMachines;
+    return numWashingMachines;
+}
+
+int Laundromat::addCoinDispenser(int numberOfDispensers, std::string coinType)
+{
+    if (coinType == "Quarter" || coinType == "Dimes")
+        coinDispensers += numberOfDispensers;
+    return coinDispensers;
+}
+
+int Laundromat::hireEmployee(int staffTotal, std::string employeeName, bool nowHiring)
+{
+    if (nowHiring == true && staffTotal < 25 && employeeName != "None")
+        numEmployees += 1;
+    else
+        numEmployees -= 1;
+    return numEmployees;
+}
 
 struct Display
 {
@@ -331,19 +461,24 @@ struct Display
     std::string changeColorCalibration(std::string displayPreference = "None");
 };
 
-/*
-Thing 6) Memory
-5 properties:
-    1) brand (std::string)
-    2) RAM consumption (double)
-    3) memory capacity (int)
-    4) memory speed (std::string)
-    5) memory type (std::string)
-3 things it can do:
-    1) run programs simultaneously 
-    2) limit amount of RAM consumption
-    3) overclock RAM
- */
+void Display::changePixelResolution(int newPixelSetting, std::string settingName)
+{
+    if (colorSetting != settingName)
+        numPixels = newPixelSetting;
+}
+
+void Display::displayDisplayInfo(std::string brandName, int year, std::string modelName)
+{
+    std::cout << "Brand Name: " << brandName << std::endl;
+    std::cout << "Year: " << year << std::endl;
+    std::cout << "Model Name: " << modelName << std::endl;
+}
+
+std::string Display::changeColorCalibration(std::string displayPreference)
+{
+    colorSetting = displayPreference;
+    return colorSetting;
+}
 
 struct Memory
 {
@@ -366,19 +501,30 @@ struct Memory
     bool overclockRam(bool overheated = false);
 };
 
-/*
-Thing 7) CPU
-5 properties:
-    1) brand (std::string)
-    2) number of cores (int)
-    3) core clock speed (float)
-    4) integrated graphics (std::string)
-    5) amount of power consumption / TDP (double)
-3 things it can do:
-    1) increase number of cores being used
-    2) overclock CPU
-    3) launch an application
- */
+void Memory::runPrograms(int numPrograms, double totalProgramSize, bool systemOn)
+{
+    if (systemOn == true && numPrograms < 20)
+        memoryConsumption = totalProgramSize;
+    else
+        memoryConsumption = 0;
+}
+
+int Memory::limitRamConsumption(double limitAmount, int totalAppsAllowed)
+{
+    if (totalAppsAllowed <= 3)
+        memoryCapacity -= limitAmount;
+    return memoryCapacity;
+}
+
+bool Memory::overclockRam(bool overheated)
+{
+    bool engage;
+    if (overheated == false)
+        engage = true;
+    else
+        engage = false;
+    return engage;
+}
 
 struct CPU
 {
@@ -401,19 +547,38 @@ struct CPU
     bool launchApplication(std::string programName, double memorySize);
 };
 
-/*
-Thing 8) Programs
-5 properties:
-    1) name of software (std::string)
-    2) current installed version (float)
-    3) new update availability (bool)
-    4) name of software company (std::string)
-    5) operating system (std::string)
-3 things it can do:
-    1) check for any updates
-    2) install updates
-    3) display installed version and operating system details 
- */
+int CPU::increaseNumCores(int increasedCores)
+{
+    numCores += increasedCores;
+    return numCores;
+}
+
+void CPU::overclockCpu(bool overclockedState)
+{
+    if (overclockedState == false)
+    {
+        clockSpeed -= .1f;
+        powerConsumption += .5;
+    }
+    else
+        std::cout << "Can not overclock CPU." << std::endl;
+}
+
+bool CPU::launchApplication(std::string programName, double memorySize)
+{
+    bool launch;
+    if (memorySize < 499999.99)
+    {
+        std::cout << "Launching " << programName << std::endl;
+        launch = true;
+    }
+    else
+    {
+        std::cout << "Can not launch " << programName << std::endl;
+        launch = false;
+    }
+    return launch;
+}
 
 struct Program
 {
@@ -431,24 +596,36 @@ struct Program
     // check for any updates
     bool checkForUpdates(std::string softwareName, std::string companyName, float versionNum);
     // install updates
-    float installUpdates(float currentVersion, bool availableUpdate);
+    float installUpdates(float currentVersion, bool update);
     // display installed version and operating system details
     void displayProgramDetails(float installedVersion, std::string operatingSystem);
 };
 
-/*
-Thing 9) Storage
-5 properties:
-    1) capactiy (int)
-    2) storage type (std::string)
-    3) dimension size (double)
-    4) brand (std::string)
-    5) type of storage interface (std::string)
-3 things it can do:
-    1) change boot drive
-    2) partition drives
-    3) store data to drive
- */
+bool Program::checkForUpdates(std::string software, std::string companyName, float versionNum)
+{
+    bool update;
+    if (softwareName == software && softwareCompany == companyName && version < versionNum)
+        update = true;
+    else
+        update = false;
+    return update;
+}
+
+float Program::installUpdates(float currentVersion, bool update)
+{
+    float installVersion;
+    if (update == true)
+        installVersion = currentVersion;
+    else
+        installVersion = version;
+    return installVersion;
+}
+
+void Program::displayProgramDetails(float installedVersion, std::string system)
+{
+    std::cout << "Installed Version: " << installedVersion << std::endl;
+    std::cout << "Operation System: " << system << std::endl;
+}
 
 struct Storage
 {
@@ -471,20 +648,45 @@ struct Storage
     bool storeDataToDrive(std::string fileName, double memorySize, char driveLetter = 'C');
 };
 
-/*
-Thing 10) Computer
-5 properties:
-    1) Display
-    2) Memory
-    3) CPU
-    4) Programs
-    5) Storage 
+bool Storage::changeBootDrive(std::string bootDevice)
+{
+    bool changeDrive;
+    if (storageType == bootDevice)
+        changeDrive = true;
+    else
+        changeDrive = true;
+    return changeDrive;
+}
 
-3 things it can do:
-    1) install program
-    2) increase brightness for screen
-    3) increase number of core processing for CPU
- */
+bool Storage::partitionDrive(char driveLetter, double shrinkSize, int sizeAvailable)
+{
+    bool status;
+    if (driveLetter == 'C' && sizeAvailable > 0)
+    {
+        capacity -= shrinkSize;
+        status = true;
+    }
+    else
+        status = false;
+    return status;
+}
+
+bool Storage::storeDataToDrive(std::string fileName, double memorySize, char driveLetter)
+{
+    bool status;
+    if (driveLetter == 'C' && (capacity - memorySize) > 0)
+    {
+        std::cout << fileName << " has been added to harddrive." << std::endl;
+        capacity -= memorySize;
+        status = true;
+    }
+    else
+    {
+        std::cout << fileName << " can not be added to harddrive." << std::endl;
+        status = false;
+    }
+    return status;
+}
 
 struct Computer
 {
@@ -505,6 +707,32 @@ struct Computer
     // increase number of core processing for CPU
     bool increaseCoreProcessing(CPU currentCpu, int numCores = 1);
 };
+
+void Computer::installProgram(Program newProgram)
+{
+    std::cout << "Installed " << newProgram.softwareName << " version " << newProgram.version << std::endl;
+}
+
+void Computer::increaseScreenBrightness(Display screen, double numBrightness)
+{
+    if (numBrightness > 50)
+        screen.colorSetting = "Default";
+    else
+        screen.colorSetting = "Movie";
+}
+
+bool increaseCoreProcessing(CPU currentCpu, int numCores)
+{
+    bool increased;
+    if (numCores % 2 == 0)
+    {
+        currentCpu.numCores += numCores;
+        increased = true;
+    }
+    else
+        increased = false;
+    return increased;
+}
 
 /*
  MAKE SURE YOU ARE NOT ON THE MASTER BRANCH
