@@ -1009,7 +1009,7 @@ int main()
     std::cout << "Value of computer1's member variable memoryRam: " << computer1.memoryRam.brand << " " << computer1.memoryRam.memoryConsumption << " " << computer1.memoryRam.memoryCapacity << " " << computer1.memoryRam.memorySpeed << " " << computer1.memoryRam.memoryType << std::endl;
     std::cout << "Value of computer1's member variable centralProcessingUnit: " << computer1.centralProcessingUnit.brand << " " << computer1.centralProcessingUnit.numCores << " " << computer1.centralProcessingUnit.clockSpeed << " " << computer1.centralProcessingUnit.graphics << " " << computer1.centralProcessingUnit.powerConsumption << std::endl;
     std::cout << "Value of computer1's member variable program: " << computer1.program.softwareName << " " << computer1.program.version << " " << computer1.program.availableUpdate << " " << computer1.program.softwareCompany << " " << computer1.program.operatingSystem << std::endl;
-    std::cout << "Value of computer1's member variable storage: " << " " << computer1.storage.capacity << " " << computer1.storage.storageType << " " << computer1.storage.dimensions << " " << computer1.storage.brand << " " << computer1.storage.storageInterface << std::endl;
-    
+    std::cout << "Value of computer1's member variable storage: " << computer1.storage.capacity << " " << computer1.storage.storageType << " " << computer1.storage.dimensions << " " << computer1.storage.brand << " " << computer1.storage.storageInterface << std::endl;
+
     std::cout << "good to go!" << std::endl;
 }
