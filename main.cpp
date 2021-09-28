@@ -20,7 +20,7 @@ namespace Example
 struct UDT  
 {
     int a; //a member variable
-    float b { 2.f }; // in-class initialization
+    float b {2.f}; // in-class initialization
     UDT() : a(0) { } // 'constructor-initializer-list' member variable initialization
     void printThing()  //the member function
     {
@@ -53,11 +53,11 @@ struct Gym
 
     struct Member
     {
-        std::string memberName = "Steven Jones";
-        double accountBalance = 1000.35;
-        bool autoPayEnabled = true;
-        int birthYear = 1989;
-        double weight = 155.5;
+        std::string memberName = "";
+        double accountBalance = 0.0;
+        bool autoPayEnabled = false;
+        int birthYear = 0;
+        double weight = 0;
 
         double getMemberAccountBalance(int accountNumber);
         double weighCurrentSelf(double startingWeight, bool finishedWorkout = true);
@@ -81,21 +81,11 @@ struct Gym
 Gym::Member::Member()
 {
     std::cout << "Creating an object of the Member structure." << std::endl;
-    memberName = "";
-    accountBalance = 0;
-    autoPayEnabled = false;
-    birthYear = 0;
-    weight = 0;
 }
 
-Gym::Gym()
+Gym::Gym() : numTreadmills(0), numDumbells(0), numSquatRacks(0), numUsers(0), costOfMonthlyElectricity(0.0)
 {
     std::cout << "Creating an object of the Gym structure." << std::endl;
-    numTreadmills = 0;
-    numDumbells = 0;
-    numSquatRacks = 0;
-    numUsers = 0;
-    costOfMonthlyElectricity = 0.0;
 }
 
 double Gym::Member::getMemberAccountBalance(int accountNumber)
@@ -126,6 +116,7 @@ void Gym::Member::exercise(std::string machineType, int minutes)
 
 double Gym::billMonthlyFee(Member member, float discount)
 {
+    std::cout << "Initialized Value of accountBalance: " << member.accountBalance << std::endl;
     std::cout << "double Gym::billMonthlyFee(Member, float) " << member.accountBalance << std::endl;
     member.accountBalance -= static_cast<double>(discount * 35.5f);
     return member.accountBalance;
@@ -133,6 +124,7 @@ double Gym::billMonthlyFee(Member member, float discount)
 
 bool Gym::turnOnEquipment(std::string employeeName, bool equipmentState)
 {
+    std::cout << "Initialized Value of autoPayEnabled: " << gymMember.autoPayEnabled << std::endl;
     std::cout << "bool Gym::turnOnEquipment(std::string, bool) " << equipmentState << std::endl;
     if (equipmentState == false && employeeName != "None")
         equipmentState = true;
@@ -143,6 +135,7 @@ bool Gym::turnOnEquipment(std::string employeeName, bool equipmentState)
 
 bool Gym::turnOffElectricity(bool switchSetting)
 {
+    std::cout << "Initalized Value of weight: " << gymMember.weight << std::endl;
     std::cout << "bool Gym::turnOffElectricity(bool) " << switchSetting << std::endl;
     if (switchSetting == true)
         switchSetting = false;
@@ -154,15 +147,15 @@ bool Gym::turnOffElectricity(bool switchSetting)
 struct School
 {
     // number of teachers
-    int numTeachers = 100;
+    int numTeachers = 0;
     // name of school with mascot
-    std::string schoolName = "Berkeley Bears";
+    std::string schoolName {"None"};
     // number of students
-    int numStudents = 1000;
+    int numStudents = 0;
     // number of courses available
-    int numCourses = 350;
+    int numCourses {0};
     // total amount of education fund
-    double educationFund = 150350.75;
+    double educationFund = {0.00};
 
     struct Teacher
     {
@@ -193,24 +186,14 @@ struct School
     Teacher mathTeacher; 
 };
 
-School::Teacher::Teacher()
+School::Teacher::Teacher() : teacherName("None"), numWorkingYears(0), department("None"), gradeLevel(9), teacherEmail("none@pausd.edu")
 {
     std::cout << "Creating an object of the Teacher structure." << std::endl;
-    teacherName = "None";
-    numWorkingYears = 0;
-    department = "None";
-    gradeLevel = 9;
-    teacherEmail = "none@pausd.edu";
 }
 
 School::School()
 {
     std::cout << "Creating an object of the School structure." << std::endl;
-    numTeachers = 0;
-    schoolName = "None";
-    numStudents = 0;
-    numCourses = 0;
-    educationFund = 0.00;
 }
 
 void School::Teacher::teachClass(std::string day, int classDuration)
@@ -237,6 +220,7 @@ void School::Teacher::dismissClass(int minRemaining, bool finishedLecture)
 
 bool School::hireOrFireTeacher(Teacher teacher)
 {
+    std::cout << "Initialized Value of numTeachers: " << std::endl;
     std::cout << "School::hireOrFireTeacher(Teacher) " << teacher.numWorkingYears << std::endl;
     bool hire;
     if (teacher.department == "Mathematics")
@@ -248,6 +232,7 @@ bool School::hireOrFireTeacher(Teacher teacher)
 
 void School::addStudentToClass(Teacher teacher, std::string studentName)
 {
+    std::cout << "Initialized Value of gradeLevel: " << mathTeacher.gradeLevel << std::endl;
     std::cout << "School::addStudentToClass(Teacher, std::string) " << numStudents << std::endl;
     if (teacher.numWorkingYears > 10 && studentName != "None")
         numStudents += 1;
@@ -257,6 +242,7 @@ void School::addStudentToClass(Teacher teacher, std::string studentName)
 
 void School::addCourse(std::string courseName, int gradeLevel)
 {
+    std::cout << "Initialized Value of teacherEmail: " << mathTeacher.teacherEmail << std::endl;
     std::cout << "School::addCourse(std::string, int) " << courseName << std::endl;
     if (gradeLevel >= 9 && courseName != "None")
         numCourses += 1;
@@ -288,18 +274,19 @@ struct PizzaStore
     PizzaStore();
 };
 
-PizzaStore::PizzaStore()
+PizzaStore::PizzaStore() : 
+numEmployees(0),
+storeName("None"),
+totalMonthlySales(0.00),
+numOvens(5),
+numToppings(0)
 {
     std::cout << "Creating an object of the PizzaStore structure." << std::endl;
-    numEmployees = 0;
-    storeName = "None";
-    totalMonthlySales = 0.00;
-    numOvens = 0;
-    numToppings = 0;
 }
 
 double PizzaStore::billCustomer(std::string pizzaType, int toppings, float discountSale)
 {
+    std::cout << "Initialized Value of storeName: " << storeName << std::endl;
     std::cout << "double PizzaStore::billCustomer(std::string, int, float) " << pizzaType << std::endl;
     double bill;
     if (pizzaType == "regular")
@@ -310,6 +297,7 @@ double PizzaStore::billCustomer(std::string pizzaType, int toppings, float disco
 
 int PizzaStore::addToppings(std::string toppingName, bool maxedOutToppings)
 {
+    std::cout << "Initialized Value of numOvens: " << std::endl;
     std::cout << "int PizzaStore::addToppings(std::string, bool) " << toppingName << std:: endl;
     if (maxedOutToppings == false && toppingName != "Pineapple")
         numToppings += 1;
@@ -318,6 +306,7 @@ int PizzaStore::addToppings(std::string toppingName, bool maxedOutToppings)
 
 bool PizzaStore::hireOrFireEmployee(std::string employeeName, int totalStaffMembers)
 {
+    std::cout << "Initialized Value of totalMonthlySales: " << totalMonthlySales << std::endl;
     std::cout << "bool PizzaStore::hireOrFireEmployee(std::string, int) " << employeeName << std::endl;
     bool hire;
     if (employeeName != "None" || totalStaffMembers < 25)
@@ -336,15 +325,15 @@ bool PizzaStore::hireOrFireEmployee(std::string employeeName, int totalStaffMemb
 struct Laundromat
 {
     // number of washing machines
-    int numWashingMachines = 54;
+    int numWashingMachines = 0;
     // number of dryers
-    int numDryers = 54;
+    int numDryers = 0;
     // number of change machines / coin dispensers
-    int coinDispensers = 3;
+    int coinDispensers = 0;
     // monthly profits
-    double monthlyProfits = 1515.53;
+    double monthlyProfits {0.00};
     // number of employees
-    int numEmployees = 6;
+    int numEmployees = 0;
 
     // increase number of washing machines
     int addWashingMachine(int numberOfMachines, std::string brandName);
@@ -360,15 +349,11 @@ struct Laundromat
 Laundromat::Laundromat()
 {
     std::cout << "Creating an object of the Laundromat structure." << std::endl;
-    numWashingMachines = 0;
-    numDryers = 0;
-    coinDispensers = 0;
-    monthlyProfits = 0.0;
-    numEmployees = 0;
 }
 
 int Laundromat::addWashingMachine(int numberOfMachines, std::string brandName)
 {
+    std::cout << "Initialized Value of monthlyProfits: " << monthlyProfits << std::endl;
     std::cout << "int LaundroMat::addWashingMachine(int, std::string) " << brandName << std::endl;
     if (numberOfMachines > 0 && brandName == "LG")
         numWashingMachines += numberOfMachines;
@@ -377,6 +362,7 @@ int Laundromat::addWashingMachine(int numberOfMachines, std::string brandName)
 
 int Laundromat::addCoinDispenser(int numberOfDispensers, std::string coinType)
 {
+    std::cout << "Initialized Value of numDryers: " << numDryers << std::endl;
     std::cout << "int Laundromat::addCoinDispenser(int, std::string) " << coinType << std::endl;
     if (coinType == "Quarter" || coinType == "Dimes")
         coinDispensers += numberOfDispensers;
@@ -385,6 +371,7 @@ int Laundromat::addCoinDispenser(int numberOfDispensers, std::string coinType)
 
 int Laundromat::hireEmployee(int staffTotal, std::string employeeName, bool nowHiring)
 {
+    std::cout << "Initialized Value of numEmployees: " << numEmployees << std::endl;
     std::cout << "int Laundromat::hireEmployee(int, std::string, bool) " << employeeName << std::endl;
     if (nowHiring == true && staffTotal < 25 && employeeName != "None")
         numEmployees += 1;
@@ -417,18 +404,14 @@ struct Display
     Display();
 };
 
-Display::Display()
+Display::Display() : colorSetting("None"), numPixels(0), brand("None"), yearOfMake(0), modelType("None")
 {
     std::cout << "Creating an object of the Display structure." << std::endl;
-    colorSetting = "Default";
-    numPixels = 0;
-    brand = "None";
-    yearOfMake = 0;
-    modelType = "None";
 }
 
 void Display::changePixelResolution(int newPixelSetting, std::string settingName)
 {
+    std::cout << "Initialized Value of numPixels: " << numPixels << std::endl;
     std::cout << "void Display::changePixelResolution(int, std::string) " << newPixelSetting << std::endl;
     if (colorSetting != settingName)
         numPixels = newPixelSetting;
@@ -436,6 +419,7 @@ void Display::changePixelResolution(int newPixelSetting, std::string settingName
 
 void Display::displayDisplayInfo(std::string brandName, int year, std::string modelName)
 {
+    std::cout << "Initialized Value of brand: " << brand << std::endl;
     std::cout << "void Display::displayDisplayInfo(std::string, int, std::string) " << modelName << std::endl;
     std::cout << "Brand Name: " << brandName << std::endl;
     std::cout << "Year: " << year << std::endl;
@@ -444,6 +428,7 @@ void Display::displayDisplayInfo(std::string brandName, int year, std::string mo
 
 std::string Display::changeColorCalibration(std::string displayPreference)
 {
+    std::cout << "Initialized Value of colorSetting: " << colorSetting << std::endl;
     std::cout << "std::string Display::changeColorCalibration(std::string) " << displayPreference << std::endl;
     colorSetting = displayPreference;
     return colorSetting;
@@ -452,15 +437,15 @@ std::string Display::changeColorCalibration(std::string displayPreference)
 struct Memory
 {
     // brand
-    std::string brand = "Crucial";
+    std::string brand {"None"};
     // RAM consumption
-    double memoryConsumption = 35.4;
+    double memoryConsumption {0.00};
     // memory capacity
-    int memoryCapacity = 16;
+    int memoryCapacity {0};
     // memory speed
-    std::string memorySpeed = "DDR4 3200";
+    std::string memorySpeed {"None"};
     // memory type
-    std::string memoryType = "RAM";
+    std::string memoryType {"None"};
 
     // run programs simultaneously
     void runPrograms(int numPrograms, double totalProgramSize, bool systemOn = true);
@@ -476,15 +461,11 @@ struct Memory
 Memory::Memory()
 {
     std::cout << "Creating an object of the Memory structure." << std::endl;
-    brand = "None";
-    memoryConsumption = 0.0;
-    memoryCapacity = 0;
-    memorySpeed = "None";
-    memoryType = "None";
 }
 
 void Memory::runPrograms(int numPrograms, double totalProgramSize, bool systemOn)
 {
+    std::cout << "Initialized Value of memoryConsumption: " << memoryConsumption << std::endl; 
     std::cout << "void Memory::runPrograms(int, double, bool) " << numPrograms << std::endl;
     if (systemOn == true && numPrograms < 20)
         memoryConsumption = totalProgramSize;
@@ -494,6 +475,7 @@ void Memory::runPrograms(int numPrograms, double totalProgramSize, bool systemOn
 
 int Memory::limitRamConsumption(double limitAmount, int totalAppsAllowed)
 {
+    std::cout << "Initialized Value of memorySpeed: " << memorySpeed << std::endl;
     std::cout << "int Memory::limitRamConsumption(double, int) " << limitAmount << std::endl;
     if (totalAppsAllowed <= 3)
         memoryCapacity -= limitAmount;
@@ -502,6 +484,7 @@ int Memory::limitRamConsumption(double limitAmount, int totalAppsAllowed)
 
 bool Memory::overclockRam(bool overheated)
 {
+    std::cout << "Initialied Value of memoryType: " << memoryType << std::endl;
     std::cout << "bool Memory::overclockRam(bool) " << overheated << std::endl;
     bool engage;
     if (overheated == false)
@@ -535,18 +518,19 @@ struct CPU
     CPU();
 };
 
-CPU::CPU()
+CPU::CPU() :
+brand("None"),
+numCores(0),
+clockSpeed(0.0f),
+graphics("None"),
+powerConsumption(0.0)
 {
     std::cout << "Creating an object of the CPU structure." << std::endl;
-    brand = "None";
-    numCores = 0;
-    clockSpeed = 0.0f;
-    graphics = "None";
-    powerConsumption = 0.00;
 }
 
 int CPU::increaseNumCores(int increasedCores)
 {
+    std::cout << "Initialized Value of powerConsumption: " << powerConsumption << std::endl;
     std::cout << "int CPU::increaseNumCores(int) " << increasedCores << std::endl;
     numCores += increasedCores;
     return numCores;
@@ -554,6 +538,7 @@ int CPU::increaseNumCores(int increasedCores)
 
 void CPU::overclockCpu(bool overclockedState)
 {
+    std::cout << "Initialized Value of clockSpeed: " << clockSpeed << std::endl;
     std::cout << "void CPU::overclockCpu(bool) " << overclockedState << std::endl;
     if (overclockedState == false)
     {
@@ -566,6 +551,7 @@ void CPU::overclockCpu(bool overclockedState)
 
 bool CPU::launchApplication(std::string programName, double memorySize)
 {
+    std::cout << "Initialized Value of graphics: " << graphics << std::endl;
     std::cout << "bool CPU::launchApplication(std::string, double) " << programName << std::endl;
     bool launch;
     if (memorySize < 499999.99)
@@ -605,18 +591,14 @@ struct Program
     Program();
 };
 
-Program::Program()
+Program::Program() : softwareName("None"), version(0.0f), availableUpdate(false), softwareCompany("None"), operatingSystem("None")
 {
     std::cout << "Creating an object of the Program structure." << std::endl;
-    softwareName = "None";
-    version = 0.0f;
-    availableUpdate = false;
-    softwareCompany = "None";
-    operatingSystem = "None";
 }
 
 bool Program::checkForUpdates(std::string software, std::string companyName, float versionNum)
 {
+    std::cout << "Initialized Value of version: " << version << std::endl;
     std::cout << "bool Program::checkForUpdates(std::string, std::string, float) " << software << std::endl;
     bool update;
     if (softwareName == software && softwareCompany == companyName && version < versionNum)
@@ -628,6 +610,7 @@ bool Program::checkForUpdates(std::string software, std::string companyName, flo
 
 float Program::installUpdates(float currentVersion, bool update)
 {
+    std::cout << "Initialized Value of availableUpdate: " << availableUpdate << std::endl;
     std::cout << "float Program::installUpdates(float, bool) " << currentVersion << std::endl;
     float installVersion;
     if (update == true)
@@ -639,6 +622,7 @@ float Program::installUpdates(float currentVersion, bool update)
 
 void Program::displayProgramDetails(float installedVersion, std::string system)
 {
+    std::cout << "Initialized Value of softwareName: " << softwareName << std::endl;
     std::cout << "void Program::displayProgramDetails(float, std::string) " << system << std::endl;
     std::cout << "Installed Version: " << installedVersion << std::endl;
     std::cout << "Operation System: " << system << std::endl;
@@ -647,15 +631,15 @@ void Program::displayProgramDetails(float installedVersion, std::string system)
 struct Storage
 {
     // capacity
-    int capacity = 5000000;
+    int capacity = 0;
     // storage type
-    std::string storageType = "SSD";
+    std::string storageType = "None";
     // dimension size
-    double dimensions = 2.5;
+    double dimensions = 0.0;
     // brand
-    std::string brand = "Crucial";
+    std::string brand = "None";
     // type of storage interface
-    std::string storageInterface = "SATA III";
+    std::string storageInterface = "None";
 
     // change boot drive
     bool changeBootDrive(std::string bootDevice);
@@ -671,15 +655,11 @@ struct Storage
 Storage::Storage()
 {
     std::cout << "Creating an object of the Storage structure." << std::endl;
-    capacity = 0;
-    storageType = "None";
-    dimensions = 0.0;
-    brand = "None";
-    storageInterface = "None";
 }
 
 bool Storage::changeBootDrive(std::string bootDevice)
 {
+    std::cout << "Initialized Value of storageType: " << storageType << std::endl;
     std::cout << "bool Storage::changeBootDrive(std::string) " << bootDevice << std::endl;
     bool changeDrive;
     if (storageType == bootDevice)
@@ -691,6 +671,7 @@ bool Storage::changeBootDrive(std::string bootDevice)
 
 bool Storage::partitionDrive(char driveLetter, double shrinkSize, int sizeAvailable)
 {
+    std::cout << "Initialized Value of brand: " << brand << std::endl;
     std::cout << "bool Storage::partitionDrive(char, double, int) " << driveLetter << std::endl;
     bool status;
     if (driveLetter == 'C' && sizeAvailable > 0)
@@ -705,6 +686,7 @@ bool Storage::partitionDrive(char driveLetter, double shrinkSize, int sizeAvaila
 
 bool Storage::storeDataToDrive(std::string fileName, double memorySize, char driveLetter)
 {
+    std::cout << "Initialized Value of storageInterface: " << storageInterface << std::endl;
     std::cout << "bool Storage::storeDataToDrive(std::string, double, char) " << fileName << std::endl;
     bool status;
     if (driveLetter == 'C' && (capacity - memorySize) > 0)
@@ -745,24 +727,21 @@ struct Computer
     Computer();
 };
 
-Computer::Computer()
+Computer::Computer() : displayScreen(Display()), memoryRam(Memory()), centralProcessingUnit(CPU()), program(Program()), storage(Storage()) 
 {
     std::cout << "Creating an object of the Computer structure." << std::endl;
-    displayScreen = Display();
-    memoryRam = Memory();
-    centralProcessingUnit = CPU();
-    program = Program();
-    storage = Storage();
 }
 
 void Computer::installProgram(Program newProgram)
 {
+    std::cout << "Initialized Value of displayScreen's yearOfMake: " << displayScreen.yearOfMake << std::endl;
     std::cout << "void Computer::installprogram(Program) " << newProgram.softwareName << std::endl;
     std::cout << "Installed " << newProgram.softwareName << " version " << newProgram.version << std::endl;
 }
 
 void Computer::increaseScreenBrightness(Display screen, double numBrightness)
 {
+    std::cout << "Initialized Value of memoryRam's memoryCapacity: " << memoryRam.memoryCapacity << std::endl;
     std::cout << "void Computer::increaseScreenBrightness(Display, double) " << numBrightness << std::endl;
     if (numBrightness > 50)
         screen.colorSetting = "Default";
@@ -772,6 +751,7 @@ void Computer::increaseScreenBrightness(Display screen, double numBrightness)
 
 bool Computer::increaseCoreProcessing(CPU currentCpu, int numCores)
 {
+    std::cout << "Initialized Value of storage's dimensions: " << storage.dimensions << std::endl;
     std::cout << "bool increaseCoreProcessing(CPU, int) " << numCores << std::endl;
     bool increased;
     if (numCores % 2 == 0)
