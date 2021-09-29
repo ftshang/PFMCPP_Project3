@@ -103,7 +103,7 @@ struct Gym
     // turn on and off electricity
     bool turnOffElectricity(bool switchSetting = true);
     // new member function
-    Gym findGymLocation(int threshold, int startingValue, Gym &gym);
+    int findGymLocation(int threshold, int startingValue);
 
     Gym();
     
@@ -176,15 +176,16 @@ bool Gym::turnOffElectricity(bool switchSetting)
     return switchSetting;
 }
 
-Gym Gym::findGymLocation(int threshold, int startingValue, Gym &gym)
+int Gym::findGymLocation(int threshold, int startingValue)
 {
+    Gym gym;
     while(startingValue < threshold)
     {
         gym.numTreadmills += 1;
         gym.numUsers += 1;
         startingValue += 1;
     }
-    return gym;
+    return gym.numUsers;
 }
 
 int Gym::Member::findMemberYears(int threshold, int startingValue)
@@ -224,7 +225,7 @@ struct School
         bool askForPromotion(double payIncrease);
         void dismissClass(int minRemaining = 0, bool finishedLecture = true);
         // new member function
-        Teacher returnTeacher(int threshold, int startingValue);
+        int returnTeacher(int threshold, int startingValue);
 
         // Constructor
         Teacher();
@@ -237,7 +238,7 @@ struct School
     // add course to full course catalog
     void addCourse(std::string courseName, int gradeLevel = 9);
     // new member function
-    School returnSchool(int threshold, int startingValue);
+    double returnSchool(int threshold, int startingValue);
 
     // Constructor
     School();
@@ -309,29 +310,29 @@ void School::addCourse(std::string courseName, int gradeLevel)
         numCourses -= 1;
 }
 
-School::Teacher School::Teacher::returnTeacher(int threshold, int startingValue)
+int School::Teacher::returnTeacher(int threshold, int startingValue)
 {
     Teacher t1;
     while (startingValue < threshold)
     {
         t1.numWorkingYears += 10;
         if (startingValue + threshold < t1.numWorkingYears)
-            return t1;
+            return t1.numWorkingYears;
     }
-    return t1;
+    return t1.numWorkingYears;
 }
 
-School School::returnSchool(int threshold, int startingValue)
+double School::returnSchool(int threshold, int startingValue)
 {
     School s1;
     for (int i = startingValue; i < threshold; startingValue+=2)
     {
         s1.numTeachers += 1;
-        s1.numStudents += 3;
+        s1.educationFund += 3.5;
         if (startingValue <= s1.numStudents)
-            return s1;
+            return s1.educationFund;
     }
-    return s1;
+    return s1.educationFund;
 }
 
 struct PizzaStore
@@ -354,7 +355,7 @@ struct PizzaStore
     // hire or fire employee
     bool hireOrFireEmployee(std::string employeeName, int totalStaffMembers);
     // new member function
-    PizzaStore getPizzaStore(int threshold, int startingValue);
+    double getPizzaStore(int threshold, int startingValue);
 
     // Constructor
     PizzaStore();
@@ -408,16 +409,17 @@ bool PizzaStore::hireOrFireEmployee(std::string employeeName, int totalStaffMemb
     return hire;
 }
 
-PizzaStore PizzaStore::getPizzaStore(int threshold, int startingValue)
+double PizzaStore::getPizzaStore(int threshold, int startingValue)
 {
     PizzaStore ps1;
     while (startingValue <= threshold)
     {
         ps1.numToppings += (startingValue + 4);
+        ps1.totalMonthlySales += 100.25;
         if (ps1.numToppings > threshold)
-            return ps1;
+            return ps1.totalMonthlySales;
     }
-    return ps1;
+    return ps1.totalMonthlySales;
 }
 
 struct Laundromat
@@ -440,7 +442,7 @@ struct Laundromat
     // increase number of employees
     int hireEmployee(int staffTotal, std::string employeeName, bool nowHiring = true);
     // new member function
-    Laundromat getNewLaundromat(int threshold, int startingValue);
+    double getNewLaundromat(int threshold, int startingValue);
 
     // Constructor
     Laundromat();
@@ -480,7 +482,7 @@ int Laundromat::hireEmployee(int staffTotal, std::string employeeName, bool nowH
     return numEmployees;
 }
 
-Laundromat Laundromat::getNewLaundromat(int threshold, int startingValue)
+double Laundromat::getNewLaundromat(int threshold, int startingValue)
 {
     Laundromat l;
     for (int i = startingValue; i < threshold; startingValue++)
@@ -488,9 +490,9 @@ Laundromat Laundromat::getNewLaundromat(int threshold, int startingValue)
         l.monthlyProfits += 15.15;
         l.numEmployees -= 10;
         if (threshold + numEmployees < startingValue)
-            return l;
+            return l.monthlyProfits;
     }
-    return l;
+    return l.monthlyProfits;
 }
 
 struct Display
@@ -513,7 +515,7 @@ struct Display
     // set color calibration
     std::string changeColorCalibration(std::string displayPreference = "None");
     // new member function
-    Display getNewDisplay(int threshold, int startingValue);
+    std::string getNewDisplay(int threshold, int startingValue);
 
     // Constructor
     Display();
@@ -549,7 +551,7 @@ std::string Display::changeColorCalibration(std::string displayPreference)
     return colorSetting;
 }
 
-Display Display::getNewDisplay(int threshold, int startingValue)
+std::string Display::getNewDisplay(int threshold, int startingValue)
 {
     Display d1;
     while (startingValue < threshold)
@@ -557,9 +559,9 @@ Display Display::getNewDisplay(int threshold, int startingValue)
         d1.colorSetting += "i";
         d1.numPixels += 10;
         if (d1.numPixels + startingValue > threshold)
-            return d1;
+            return d1.colorSetting;
     }
-    return d1;
+    return d1.colorSetting;
 }
 
 struct Memory
@@ -582,7 +584,7 @@ struct Memory
     // overclock RAM
     bool overclockRam(bool overheated = false);
     // new member function
-    Memory newMemoryComponent(int threshold, int startingValue);
+    double newMemoryComponent(int threshold, int startingValue);
 
     // Constructor
     Memory();
@@ -624,7 +626,7 @@ bool Memory::overclockRam(bool overheated)
     return engage;
 }
 
-Memory Memory::newMemoryComponent(int threshold, int startingValue)
+double Memory::newMemoryComponent(int threshold, int startingValue)
 {
     Memory m1;
     for (int i = startingValue; i < threshold; i++)
@@ -632,9 +634,9 @@ Memory Memory::newMemoryComponent(int threshold, int startingValue)
         m1.memoryConsumption += .10;
         m1.memoryCapacity += 4;
         if (m1.memoryCapacity + startingValue >= threshold)
-            return m1;
+            return m1.memoryConsumption;
     }
-    return m1;
+    return m1.memoryConsumption;
 }
 
 struct CPU
@@ -657,7 +659,7 @@ struct CPU
     // launch an application
     bool launchApplication(std::string programName, double memorySize);
     // new member function
-    CPU swapCpu(int threshold, int startingValue);
+    float swapCpu(int threshold, int startingValue);
 
     // Constructor
     CPU();
@@ -711,8 +713,7 @@ bool CPU::launchApplication(std::string programName, double memorySize)
     }
     return launch;
 }
-
-CPU CPU::swapCpu(int threshold, int startingValue)
+float CPU::swapCpu(int threshold, int startingValue)
 {
     CPU c;
     while(startingValue < threshold)
@@ -721,9 +722,9 @@ CPU CPU::swapCpu(int threshold, int startingValue)
         c.numCores += 1;
         startingValue += 5;
         if (startingValue + numCores >= threshold)
-            return c;
+            return c.clockSpeed;
     }
-    return c;
+    return c.clockSpeed;
 }
 
 struct Program
@@ -746,7 +747,7 @@ struct Program
     // display installed version and operating system details
     void displayProgramDetails(float installedVersion, std::string operatingSystem);
     // new member function
-    Program startNewApplication(int threshold, int startingValue);
+    float startNewApplication(int threshold, int startingValue);
 
     // Constructor
     Program();
@@ -789,7 +790,7 @@ void Program::displayProgramDetails(float installedVersion, std::string system)
     std::cout << "Operation System: " << system << std::endl;
 }
 
-Program Program::startNewApplication(int threshold, int startingValue)
+float Program::startNewApplication(int threshold, int startingValue)
 {
     Program p;
     while (startingValue < threshold)
@@ -798,7 +799,7 @@ Program Program::startNewApplication(int threshold, int startingValue)
         p.operatingSystem += "e";
         startingValue++;
     }
-    return p;
+    return p.version;
 }
 
 struct Storage
@@ -821,7 +822,7 @@ struct Storage
     // store data to drive
     bool storeDataToDrive(std::string fileName, double memorySize, char driveLetter = 'C');
     // new member function
-    Storage installNewStorage(int threshold, int startingValue);
+    double installNewStorage(int threshold, int startingValue);
 
     // Constructor
     Storage();
@@ -878,7 +879,7 @@ bool Storage::storeDataToDrive(std::string fileName, double memorySize, char dri
     return status;
 }
 
-Storage Storage::installNewStorage(int threshold, int startingValue)
+double Storage::installNewStorage(int threshold, int startingValue)
 {
     Storage s;
     for (int i = startingValue; i < threshold; i++)
@@ -886,9 +887,9 @@ Storage Storage::installNewStorage(int threshold, int startingValue)
         s.capacity += 5;
         s.dimensions += .7;
         if (startingValue + s.capacity >= threshold)
-            return s;
+            return s.dimensions;
     }
-    return s;
+    return s.dimensions;
 }
 
 struct Computer
@@ -911,7 +912,7 @@ struct Computer
     // increase number of core processing for CPU
     bool increaseCoreProcessing(CPU currentCpu, int numCores = 1);
     // new member function
-    Computer purchaseNewComputer(int threshold, int startingValue);
+    int purchaseNewComputer(int threshold, int startingValue);
 
     // Constructor
     Computer();
@@ -954,7 +955,7 @@ bool Computer::increaseCoreProcessing(CPU currentCpu, int numCores)
     return increased;
 }
 
-Computer Computer::purchaseNewComputer(int threshold, int startingValue)
+int Computer::purchaseNewComputer(int threshold, int startingValue)
 {
     Computer c;
     while (startingValue < threshold)
@@ -965,9 +966,9 @@ Computer Computer::purchaseNewComputer(int threshold, int startingValue)
         c.memoryRam.memoryConsumption += 1.1;
         c.storage.capacity += 10;
         if (startingValue + c.storage.capacity > threshold)
-            return c;
+            return c.displayScreen.numPixels;
     }
-    return c;
+    return c.displayScreen.numPixels;
 }
 
 /*
@@ -995,9 +996,9 @@ int main()
     double returnedDouble;
     bool returnedBool;
     // Calling each of gym1's member functions and displaying return values
-    auto gym2 = gym1.findGymLocation(10, 1, gym1);
-    auto num = gym1.gymMember.findMemberYears(10, 0);
-    std::cout << "gym2's numUsers: " << gym2.numUsers << std::endl;;
+    auto num = gym1.findGymLocation(10, 1);
+    std::cout << "return value of gym1.findGymLocation(int, int): " << num << std::endl;
+    num = gym1.gymMember.findMemberYears(10, 0);
     std::cout << "gym1.gymMember.findMemberYears(int, int) returns: " << num << std::endl;
     returnedDouble = gym1.billMonthlyFee(gym1.gymMember, .1f);
     std::cout << "Return Value of double Gym::billMonthlyFee(Member, float): " << returnedDouble << std::endl;
@@ -1016,11 +1017,10 @@ int main()
     // Instansiating School object
     School school1;
     // Calling each of school1's member functions
-    auto school2 = school1.returnSchool(20, 0);
-    auto teacher1 = school1.mathTeacher.returnTeacher(30, 1);
-    std::cout << "school2's numTeachers: " << school2.numTeachers << std::endl;
-    std::cout << "school2's numStudents: " << school2.numStudents << std::endl;
-    std::cout << "teacher1's numWorkingYears: " << teacher1.numWorkingYears << std::endl;
+    returnedDouble = school1.returnSchool(20, 0);
+    std::cout << "Return Value of school1.returnSchool(int, int): " << returnedDouble << std::endl;
+    num = school1.mathTeacher.returnTeacher(30, 1);
+    std::cout << "Return Value of school1.mathTeacher.returnTeacher(int, int): " << num << std::endl;
     returnedBool = school1.hireOrFireTeacher(school1.mathTeacher);
     std::cout << "Return Value of bool School::hireOrFireTeacher(Teacher): " << returnedBool << std::endl;
     school1.addStudentToClass(school1.mathTeacher, "Bill");
@@ -1037,8 +1037,8 @@ int main()
     PizzaStore pizza1;
 
     // Calling each of pizza1's member functions
-    auto pizza2 = pizza1.getPizzaStore(50, 3);
-    std::cout << "pizza2's numToppings: " << pizza2.numToppings << std::endl;
+    returnedDouble = pizza1.getPizzaStore(50, 3);
+    std::cout << "Return Value of pizza1.getPizzaStore(int, int): " << returnedDouble << std::endl;
     returnedDouble = pizza1.billCustomer("Pepperoni", 10, .05f);
     std::cout << "Return Value of double PizzaStore::billCustomer(std::string, int, float): " << returnedDouble << std::endl;
     int returnedInt = pizza1.addToppings("Pepperoni", false);
@@ -1057,9 +1057,8 @@ int main()
     Laundromat laundromat1;
 
     // Calling each of laundromat1's member functions
-    auto laundromat2 = laundromat1.getNewLaundromat(100, 10);
-    std::cout << "laundromat2's monthlyProfits: " << laundromat2.monthlyProfits << std::endl;
-    std::cout << "laundromat2's numEmployees: " << laundromat2.numEmployees << std::endl;
+    returnedDouble = laundromat1.getNewLaundromat(100, 10);
+    std::cout << "Return Value of laundromat1.getNewLaundromat(int, int): " << returnedDouble << std::endl;
     returnedInt = laundromat1.addWashingMachine(2, "LG");
     std::cout << "Return Value of int Laundromat::addWashingMachine(int, std::string): " << returnedInt << std::endl;
     returnedInt = laundromat1.addCoinDispenser(1, "Nickel");
@@ -1079,9 +1078,8 @@ int main()
     Display display1;
 
     // Calling each of display1's member functions
-    auto display2 = display1.getNewDisplay(40, 5);
-    std::cout << "display2's colorSetting: " << display2.colorSetting << std::endl;
-    std::cout << "display2's numPixels: " << display2.numPixels << std::endl;
+    auto string = display1.getNewDisplay(40, 5);
+    std::cout << "Return Value of display1.getNewDisplay(int, int): " << string << std::endl;
     display1.changePixelResolution(1500, "Unknown");
     display1.displayDisplayInfo("Samsung", 2020, "SyncMaster 3000");
     std::string returnedString = display1.changeColorCalibration("Sports");
@@ -1099,9 +1097,8 @@ int main()
     Memory memory1;
 
     // Calling each of memory1's member functions
-    auto memory2 = memory1.newMemoryComponent(100, 0);
-    std::cout << "memory2's memoryConsumption: " << memory2.memoryConsumption << std::endl;
-    std::cout << "memory2's memoryCapacity: " << memory2.memoryCapacity << std::endl;
+    returnedDouble = memory1.newMemoryComponent(100, 0);
+    std::cout << "Return Value of memory1.newMemoryComponent(int, int): " << returnedDouble << std::endl;
     memory1.runPrograms(10, 5.5, true);
     returnedInt = memory1.limitRamConsumption(10.50, 5);
     std::cout << "Return Value of int Memory::limitRamConsumption(double, int): " << returnedInt << std::endl;
@@ -1120,9 +1117,8 @@ int main()
     CPU cpu1;
 
     // Calling each of cpu1's member functions
-    auto cpu2 = cpu1.swapCpu(200, 0);
-    std::cout << "cpu2's numCores: " << cpu2.numCores << std::endl;
-    std::cout << "cpu2's clockSpeed: " << cpu2.clockSpeed << std::endl;
+    auto flt = cpu1.swapCpu(200, 0);
+    std::cout << "Return Value of cpu1.swapCpu(int, int): " << flt << std::endl;
     returnedInt = cpu1.increaseNumCores(6);
     std::cout << "Return Value of int CPU::increaseNumCores(int): " << returnedInt << std::endl;
     cpu1.overclockCpu(false);
@@ -1141,9 +1137,8 @@ int main()
     Program program1;
 
     // Calling each of program1's member functions
-    auto program2 = program1.startNewApplication(150, 0);
-    std::cout << "program2's version: " << program2.version << std::endl;
-    std::cout << "program2's operatingSystem: " << program2.operatingSystem << std::endl;
+    flt = program1.startNewApplication(150, 0);
+    std::cout << "Return Value of program1.startNewApplication(int, int): " << flt << std::endl;
     returnedBool = program1.checkForUpdates("Visual Studio", "Microsoft", 3.2f);
     std::cout << "Return Value of bool Program::checkForUpdates(std::string, std::string, float): " << returnedBool << std::endl;
     float returnedFloat = program1.installUpdates(3.3f, true);
@@ -1162,9 +1157,8 @@ int main()
     Storage storage1;
 
     // Calling each of storage1's member functions
-    auto storage2 = storage1.installNewStorage(50, 0);
-    std::cout << "storage2's capactiy: " << storage2.capacity << std::endl; 
-    std::cout << "storage2's dimensions: " << storage2.dimensions << std::endl;
+    returnedDouble = storage1.installNewStorage(50, 0);
+    std::cout << "Return Value of storage1.installNewStorage(int, int): " << returnedDouble << std::endl;
     returnedBool = storage1.changeBootDrive("USB Flash Drive");
     std::cout << "Return Value of bool Storage::changeBootDrive(std::string): " << returnedBool << std::endl;
     returnedBool = storage1.partitionDrive('D', 300.35, 3500);
@@ -1184,12 +1178,8 @@ int main()
     Computer computer1;
 
     // Calling each of computer1's member functions
-    auto computer2 = computer1.purchaseNewComputer(100, 0);
-    std::cout << "computer2's displayScreen.numPixels: " << computer2.displayScreen.numPixels << std::endl;
-    std::cout << "computer2's program.version: " << computer2.program.version << std::endl;
-    std::cout << "computer2's centralProcessingUnit.numCores: " << computer2.centralProcessingUnit.numCores << std::endl;
-    std::cout << "computer2's memoryRam.memoryConsumption: " << computer2.memoryRam.memoryConsumption << std::endl;
-    std::cout << "computer2's storage.capacity: " << computer2.storage.capacity << std::endl;
+    num = computer1.purchaseNewComputer(100, 0);
+    std::cout << "Return Value of computer1.purchaseNewComputer(int, int): " << num << std::endl;
     computer1.installProgram(program1);
     computer1.increaseScreenBrightness(display1, 5.55);
     returnedBool = computer1.increaseCoreProcessing(cpu1, 6);
