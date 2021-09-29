@@ -195,7 +195,7 @@ int Gym::Member::findMemberYears(int threshold, int startingValue)
     {
         member.birthYear += 5;
         if (member.birthYear >= threshold)
-            return member.birthYear;
+            break;
     }
     return member.birthYear;    
 }
@@ -317,7 +317,7 @@ int School::Teacher::returnTeacher(int threshold, int startingValue)
     {
         t1.numWorkingYears += 10;
         if (startingValue + threshold < t1.numWorkingYears)
-            return t1.numWorkingYears;
+            break;
     }
     return t1.numWorkingYears;
 }
@@ -330,7 +330,7 @@ double School::returnSchool(int threshold, int startingValue)
         s1.numTeachers += 1;
         s1.educationFund += 3.5;
         if (startingValue <= s1.numStudents)
-            return s1.educationFund;
+            break;
     }
     return s1.educationFund;
 }
@@ -417,7 +417,7 @@ double PizzaStore::getPizzaStore(int threshold, int startingValue)
         ps1.numToppings += (startingValue + 4);
         ps1.totalMonthlySales += 100.25;
         if (ps1.numToppings > threshold)
-            return ps1.totalMonthlySales;
+            break;
     }
     return ps1.totalMonthlySales;
 }
@@ -490,7 +490,7 @@ double Laundromat::getNewLaundromat(int threshold, int startingValue)
         l.monthlyProfits += 15.15;
         l.numEmployees -= 10;
         if (threshold + numEmployees < startingValue)
-            return l.monthlyProfits;
+            break;
     }
     return l.monthlyProfits;
 }
@@ -559,7 +559,7 @@ std::string Display::getNewDisplay(int threshold, int startingValue)
         d1.colorSetting += "i";
         d1.numPixels += 10;
         if (d1.numPixels + startingValue > threshold)
-            return d1.colorSetting;
+            break;
     }
     return d1.colorSetting;
 }
@@ -634,7 +634,7 @@ double Memory::newMemoryComponent(int threshold, int startingValue)
         m1.memoryConsumption += .10;
         m1.memoryCapacity += 4;
         if (m1.memoryCapacity + startingValue >= threshold)
-            return m1.memoryConsumption;
+            break;
     }
     return m1.memoryConsumption;
 }
@@ -722,7 +722,7 @@ float CPU::swapCpu(int threshold, int startingValue)
         c.numCores += 1;
         startingValue += 5;
         if (startingValue + numCores >= threshold)
-            return c.clockSpeed;
+           break;
     }
     return c.clockSpeed;
 }
@@ -887,7 +887,7 @@ double Storage::installNewStorage(int threshold, int startingValue)
         s.capacity += 5;
         s.dimensions += .7;
         if (startingValue + s.capacity >= threshold)
-            return s.dimensions;
+            break;
     }
     return s.dimensions;
 }
@@ -966,7 +966,7 @@ int Computer::purchaseNewComputer(int threshold, int startingValue)
         c.memoryRam.memoryConsumption += 1.1;
         c.storage.capacity += 10;
         if (startingValue + c.storage.capacity > threshold)
-            return c.displayScreen.numPixels;
+            break;
     }
     return c.displayScreen.numPixels;
 }
